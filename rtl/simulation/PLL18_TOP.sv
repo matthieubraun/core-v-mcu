@@ -47,7 +47,7 @@ module PLL18_TOP (
 `ifdef VERILATOR
    always_comb
      if (RESETN == 0)
-       CLKO = 0l\;
+       CLKO = 0; // was CLK0 = 0L\; but that is not a valid syntax according to verilator
      else 
        CLKO = FREF;
 `else
