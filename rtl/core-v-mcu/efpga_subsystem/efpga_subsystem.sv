@@ -48,7 +48,7 @@ module efpga_subsystem #(
     //eFPGA TEST MODE
     /* NO MORE USED, KEEP FOR NOW */
     output logic [15:0] testio_o,
-    input  logic [20:0] testio_i
+    // input  logic [20:1] testio_i
     /* NO MORE USED, KEEP FOR NOW */
 );
 
@@ -252,6 +252,100 @@ module efpga_subsystem #(
   assign tcdm_req_fpga_gated[0] = enable_tcdm0_efpga_i & tcdm_req_fpga[0] & tcdm_gnt_fpga[0];
 
 
-  /* Place to instantiate the eFPGA wrapper */
+  eFPGA_wrapper i_efpga_wrapper (
+      // Clock inputs
+      .CLK0              (fpga_clk0_i),
+      .CLK1              (fpga_clk1_i), 
+      .CLK2              (fpga_clk2_i),
+      .CLK3              (fpga_clk3_i),
+      .CLK4              (fpga_clk4_i),
+      .CLK5              (fpga_clk5_i),
+
+      // Reset inputs - using reset_type1_efpga_i[3:0]
+      .RESET_LB          (reset_type1_efpga_i[0]),
+      .RESET_LT          (reset_type1_efpga_i[1]), 
+      .RESET_RB          (reset_type1_efpga_i[2]),
+      .RESET_RT          (reset_type1_efpga_i[3]),
+
+      // FPGA IOs
+      .fpgaio_oe         (fpgaio_oe_o),
+      .fpgaio_out        (fpgaio_out_o),
+      .fpgaio_in         (fpgaio_in_i),
+
+      // TCDM Interface Port 3
+      .tcdm_rdata_p3     (tcdm_rdata_fpga[3]),
+      .tcdm_wdata_p3     (tcdm_wdata_fpga[3]), 
+      .tcdm_addr_p3      (tcdm_addr_fpga[3]),
+      .tcdm_be_p3        (tcdm_be_fpga[3]),
+      .tcdm_req_p3       (tcdm_req_fpga[3]),
+      .tcdm_wen_p3       (tcdm_wen_fpga[3]),
+      .tcdm_clk_p3       (tcdm_clk[3]),
+      .tcdm_gnt_p3       (tcdm_gnt_fpga[3]),
+      .tcdm_fmo_p3       (tcdm_fmo_fpga[3]),
+      .tcdm_valid_p3     (tcdm_valid_fpga[3]),
+
+      // TCDM Interface Port 2
+      .tcdm_rdata_p2     (tcdm_rdata_fpga[2]),
+      .tcdm_wdata_p2     (tcdm_wdata_fpga[2]),
+      .tcdm_addr_p2      (tcdm_addr_fpga[2]),
+      .tcdm_be_p2        (tcdm_be_fpga[2]), 
+      .tcdm_req_p2       (tcdm_req_fpga[2]),
+      .tcdm_wen_p2       (tcdm_wen_fpga[2]),
+      .tcdm_clk_p2       (tcdm_clk[2]),
+      .tcdm_gnt_p2       (tcdm_gnt_fpga[2]),
+      .tcdm_fmo_p2       (tcdm_fmo_fpga[2]),
+      .tcdm_valid_p2     (tcdm_valid_fpga[2]),
+
+      // TCDM Interface Port 1
+      .tcdm_rdata_p1     (tcdm_rdata_fpga[1]),
+      .tcdm_wdata_p1     (tcdm_wdata_fpga[1]),
+      .tcdm_addr_p1      (tcdm_addr_fpga[1]),
+      .tcdm_be_p1        (tcdm_be_fpga[1]),
+      .tcdm_req_p1       (tcdm_req_fpga[1]), 
+      .tcdm_wen_p1       (tcdm_wen_fpga[1]),
+      .tcdm_clk_p1       (tcdm_clk[1]),
+      .tcdm_gnt_p1       (tcdm_gnt_fpga[1]),
+      .tcdm_fmo_p1       (tcdm_fmo_fpga[1]),
+      .tcdm_valid_p1     (tcdm_valid_fpga[1]),
+
+      // TCDM Interface Port 0 
+      .tcdm_rdata_p0     (tcdm_rdata_fpga[0]),
+      .tcdm_wdata_p0     (tcdm_wdata_fpga[0]),
+      .tcdm_addr_p0      (tcdm_addr_fpga[0]),
+      .tcdm_be_p0        (tcdm_be_fpga[0]),
+      .tcdm_req_p0       (tcdm_req_fpga[0]),
+      .tcdm_wen_p0       (tcdm_wen_fpga[0]), 
+      .tcdm_clk_p0       (tcdm_clk[0]),
+      .tcdm_gnt_p0       (tcdm_gnt_fpga[0]),
+      .tcdm_fmo_p0       (tcdm_fmo_fpga[0]),
+      .tcdm_valid_p0     (tcdm_valid_fpga[0]),
+
+      // LINT Interface
+      .lint_ADDR         (apbt1_int.add[19:0]),
+      .lint_WEN          (apbt1_int.wen),
+      .lint_REQ          (apbt1_int.req),
+      .lint_BE           (apbt1_int.be),
+      .lint_WDATA        (apbt1_int.wdata),
+      .lint_RDATA        (apbt1_int.r_rdata),
+      .lint_GNT          (apbt1_int.gnt),
+      .lint_VALID        (apbt1_int.r_valid),
+
+      // Events and clocks
+      .apb_fpga_clk_o    (s_efpga_clk),
+      .events_o          (s_event),
+
+      // Control input
+      .control_in        (efpga_control_in),
+
+      // Status and version (tied to 0)
+      .status_out        (status_out),
+      .version          (version),
+
+      // Power/ground connections
+      .VSSC             (VSSC),
+      .VDDC_FPGA        (VDDC_FPGA),
+      .NB               (NB),
+      .PB               (PB)
+  );
 
 endmodule
