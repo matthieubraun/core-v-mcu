@@ -21,3 +21,4 @@ emulation/core-v-mcu-nexys/rtl/*.v
 vivado*
 xmverilog.*
 rtl/core-v-mcu/custom_efpga/SRC/diffeq_paj_convert_autocheck_top_tb.v
+rtl/core-v-mcu/efpga_fabric/SRC/diffeq_paj_convert_autocheck_top_tb.v
