@@ -56,7 +56,14 @@ module efpga_subsystem #(
 logic reset_hi;
 assign reset_hi = ~rst_n;
 
-/* TCDM interface */
+/////////////////////////////////////////////
+//  ████████╗ ██████╗██████╗ ███╗   ███╗   //
+//  ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║   //
+//     ██║   ██║     ██║  ██║██╔████╔██║   //
+//     ██║   ██║     ██║  ██║██║╚██╔╝██║   //
+//     ██║   ╚██████╗██████╔╝██║ ╚═╝ ██║   //
+//     ╚═╝    ╚═════╝╚═════╝ ╚═╝     ╚═╝   //
+/////////////////////////////////////////////
 XBAR_TCDM_BUS l2_efpga_tcdm[`N_EFPGA_TCDM_PORTS-1:0] ();
 logic [`N_EFPGA_TCDM_PORTS-1:0]                          tcdm_clk           ;
 logic [`N_EFPGA_TCDM_PORTS-1:0]                          tcdm_req_fpga      ;
@@ -151,10 +158,17 @@ generate
       assign tcdm_valid_fpga[g_tcdm] = l2_efpga_tcdm[g_tcdm].r_valid;
     end
 endgenerate
-/* TCDM interface */
 
 
-/* Type1 APB interface */
+
+////////////////////////////////////
+//     █████╗ ██████╗ ██████╗     //
+//    ██╔══██╗██╔══██╗██╔══██╗    //
+//    ███████║██████╔╝██████╔╝    //
+//    ██╔══██║██╔═══╝ ██╔══██╗    //
+//    ██║  ██║██║     ██████╔╝    //
+//    ╚═╝  ╚═╝╚═╝     ╚═════╝     //
+////////////////////////////////////
 XBAR_TCDM_BUS apbt1_int ();
 logic                       s_lint_VALID      ;
 logic                       s_lint_GNT        ;
@@ -217,9 +231,16 @@ always @(posedge asic_clk_i or negedge rst_n)
         //           d_lint_GNT <= {((apbt1_i.req & ~apbt1_i.wen & s_lint_GNT) | d_lint_GNT[0]),s_lint_GNT};
       end
   end
-/* Type1 APB interface */
 
-/* Event propagation from ASIC to EFPGA */
+
+////////////////////////////////////////////////////
+//  ███████╗██╗   ██╗███████╗███╗   ██╗████████╗  //
+//  ██╔════╝██║   ██║██╔════╝████╗  ██║╚══██╔══╝  //
+//  █████╗  ██║   ██║█████╗  ██╔██╗ ██║   ██║     //
+//  ██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║     //
+//  ███████╗ ╚████╔╝ ███████╗██║ ╚████║   ██║     //
+//  ╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝     //
+////////////////////////////////////////////////////
 generate
   for (genvar g_event = 0; g_event < `N_EFPGA_EVENTS; g_event++)
     begin : event_wedge_edge
@@ -247,7 +268,17 @@ assign #1 event_gate = s_event & {`N_EFPGA_EVENTS{enable_events_efpga_i}};
 `else
 assign event_gate = s_event & {`N_EFPGA_EVENTS{enable_events_efpga_i}};
 `endif
-/* Event propagation from ASIC to EFPGA */
+
+///////////////////////////////////////////////
+//  ██████╗ ██████╗  ██████╗  ██████╗       //
+//  ██╔══██╗██╔══██╗██╔═══██╗██╔════╝       //
+//  ██████╔╝██████╔╝██║   ██║██║  ███╗      //
+//  ██╔═══╝ ██╔══██╗██║   ██║██║   ██║      //
+//  ██║     ██║  ██║╚██████╔╝╚██████╔╝      //
+//  ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝       //
+///////////////////////////////////////////////
+
+// To be implemented
 
 /* MIGHT NOT BE NEEDED FOR NEW FPGA, KEEPING TO BE SURE */
 logic [31:0] control_in_d1,

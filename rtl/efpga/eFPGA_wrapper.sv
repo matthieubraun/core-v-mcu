@@ -72,11 +72,11 @@ module eFPGA_wrapper (
 
   output logic [15:0] events_o,
 
-  /* MIGHT NOT BE NEEDED FOR NEW FPGA, KEEPING TO BE SUR */
+  /* MIGHT NOT BE NEEDED FOR NEW FPGA, KEEPING TO BE SURE */
   input  logic [31:0] control_in,
   output logic [31:0] status_out,
   output logic [ 7:0] version
-  /* MIGHT NOT BE NEEDED FOR NEW FPGA, KEEPING TO BE SUR */
+  /* MIGHT NOT BE NEEDED FOR NEW FPGA, KEEPING TO BE SURE */
 );
 
 // Reset synchronization
