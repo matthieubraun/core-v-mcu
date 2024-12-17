@@ -36,7 +36,7 @@ filesets:
     - openhwgroup.org:ip:udma_camera
     - openhwgroup.org:ip:logint_dc_fifo_xbar
     - openhwgroup.org:ip:l2_tcdm_hybrid_interco
-    - quicklogic.com:ip:efpga
+    - open-fpga.com:ip:efpga_fabric
     - openhwgroup.org:ip:generic_fll
     - openhwgroup.org:ip:tcdm_interconnect
     - openhwgroup.org:ip:cv32e40p

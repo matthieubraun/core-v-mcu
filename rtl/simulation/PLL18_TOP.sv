@@ -13,51 +13,49 @@
 // -----------------------------------------------------------------------------
 
 module PLL18_TOP (
- output logic      CLKO,
- output logic      CLK,
- output logic      LOCK,
+  output logic CLKO  ,
+  output logic CLK   ,
+  output logic LOCK  ,
+  input  logic AVDD  ,
+  input  logic AVDD2 ,
+  input  logic AVSS  ,
+  input  logic DVDD  ,
+  input  logic DVSS  ,
+  input  logic FREF  ,
+  input  logic DM    ,
+  input  logic DN    ,
+  input  logic DP    ,
+  input  logic PD    ,
+  input  logic PDDP  ,
+  input  logic RESETN,
+  input  logic BYPASS,
+  input  logic MODE  ,
+  input  logic FRAC  ,
+  input  logic SLOPE ,
+  input  logic SSRATE
+);
 
- input logic       AVDD,
- input logic       AVDD2,
- input logic       AVSS,
- input logic       DVDD,
- input logic       DVSS,
-                 
- input logic       FREF,
- input logic       DM,
- input logic       DN,
- input logic       DP,
- input logic       PD,
- input logic       PDDP,
- input logic       RESETN,
- input logic       BYPASS,
- input logic       MODE,
- input logic       FRAC,
- input logic       SLOPE,
- input logic       SSRATE
-                  );
-   
 
-   logic           clk;
-   
-   assign LOCK = 1'b1;
-   
+  logic clk;
 
-   
+  assign LOCK = 1'b1;
+
+
+
 `ifdef VERILATOR
-   always_comb
-     if (RESETN == 0)
-       CLKO = 0l\;
-     else 
-       CLKO = FREF;
+  always_comb
+    if (RESETN == 0)
+      CLKO = 0;
+    else
+      CLKO = FREF;
 `else
-   initial clk = 0;
-   initial forever #(1.25) clk = ~clk;
-   always_comb begin
-      CLKO = BYPASS ? FREF : clk;
-   end
+  initial clk = 0;
+  initial forever #(1.25) clk = ~clk;
+  always_comb begin
+    CLKO = BYPASS ? FREF : clk;
+  end
 `endif
-   
-   
-   
+
+
+
 endmodule  // PLL18_TOP

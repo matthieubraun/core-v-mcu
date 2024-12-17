@@ -192,6 +192,11 @@ filesets:
     files:
     - rtl/core-v-mcu/verilator.waiver
     file_type: vlt
+  # Verilator testbench
+  verilator_tb:
+    files:
+      - sim_main.cpp
+    file_type: cppSource
 parameters:
   PULP_FPGA_EMUL:
     datatype: bool
@@ -275,6 +280,7 @@ targets:
     - mem_init_verilator
     - rtl-simulation
     - not_emulation-rtl
+    - verilator_tb
     toplevel: [core_v_mcu]
     hooks:
       pre_build: [pre_build_scripts]
@@ -283,9 +289,21 @@ targets:
         mode: cc
         verilator_options:
         - -Wno-fatal
-        - -O3
+        - -O1
         - --trace
-        - --CFLAGS -fPIC -DVL_TIME_CONTEXT
+        - --CFLAGS "-fPIC -DVL_TIME_CONTEXT"
+        - --exe
+        # - --inline-mult 1000     # Limit inline multiplication
+        # - --output-split 5000    # Reduce split size
+        - --threads 8            # Disable threading to reduce memory
+        # - --no-debug-leak       # Disable debug memory leaks
+        # - --Wno-UNOPTFLAT      # Disable unopt flat warnings
+        # - --max-num-width 64000  # Limit number width
+        # - --unroll-count 1000    # Limit loop unrolling
+        # - --output-split 10000   # Split large files
+        # - --output-split-cfuncs 500  # Split C++ functions
+        - --debug
+        - --gdbbt
 
   lint:
     <<: *default_target

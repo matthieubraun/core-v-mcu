@@ -1,8 +1,8 @@
 open-fpga:
   files: [
+    eFPGA_wrapper.sv,
     fpga_top.v,
     fpga_defines.v,
-    fabric_netlists.v,
     ./lb/grid_clb.v,
     ./lb/grid_io_bottom.v,
     ./lb/grid_io_left.v,
