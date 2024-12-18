@@ -317,7 +317,8 @@ targets:
         mode: lint-only
         verilator_options:
         - -Wno-fatal
-        - --timing
+        # - --debug
+        # - --gdbbt
 
   nexys-a7-100t:
     <<: *default_target

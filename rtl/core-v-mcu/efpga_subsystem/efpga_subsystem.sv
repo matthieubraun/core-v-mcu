@@ -30,7 +30,7 @@ module efpga_subsystem #(
   XBAR_TCDM_BUS.Master l2_asic_tcdm_o[`N_EFPGA_TCDM_PORTS-1:0],
 
   /* WILL REACTIVATE WHEN IMPLEMENTING PROGRAMMING INTERFACE */
-  // APB_BUS.Slave apbprogram_i,
+  APB_BUS.Slave apbprogram_i,
   /* WILL REACTIVATE WHEN IMPLEMENTING PROGRAMMING INTERFACE */
 
   XBAR_TCDM_BUS.Slave apbt1_i,
@@ -38,7 +38,7 @@ module efpga_subsystem #(
   //eFPGA TEST MODE
   /* NO MORE USED, KEEP FOR NOW */
   output logic [15:0] testio_o,
-  // input  logic [20:1] testio_i
+  input  logic [20:1] testio_i,
   /* NO MORE USED, KEEP FOR NOW */
 
   /* NOT CONNECTED TO ANYTHING, KEEP FOR  NOW */

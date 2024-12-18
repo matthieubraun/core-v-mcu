@@ -109,50 +109,50 @@ endgenerate
 
 // Start mapping from index 200 to avoid conflict with regular IOs
 // TCDM Port 3 (200-289)
-assign tcdm_rdata_p3               = gfpga_pad_GPIO_PAD[231:200];
-assign gfpga_pad_GPIO_PAD[263:232] = tcdm_wdata_p3;
-assign gfpga_pad_GPIO_PAD[283:264] = tcdm_addr_p3;
-assign gfpga_pad_GPIO_PAD[287:284] = tcdm_be_p3;
-assign gfpga_pad_GPIO_PAD[288]     = tcdm_req_p3;
-assign gfpga_pad_GPIO_PAD[289]     = tcdm_wen_p3;
+assign gfpga_pad_GPIO_PAD[231:200] = tcdm_rdata_p3;
+assign tcdm_wdata_p3               = gfpga_pad_GPIO_PAD[263:232];
+assign tcdm_addr_p3                = gfpga_pad_GPIO_PAD[283:264];
+assign tcdm_be_p3                  = gfpga_pad_GPIO_PAD[287:284];
+assign tcdm_req_p3                 = gfpga_pad_GPIO_PAD[288];
+assign tcdm_wen_p3                 = gfpga_pad_GPIO_PAD[289];
 
 // TCDM Port 2 (290-379)
-assign tcdm_rdata_p2               = gfpga_pad_GPIO_PAD[321:290];
-assign gfpga_pad_GPIO_PAD[353:322] = tcdm_wdata_p2;
-assign gfpga_pad_GPIO_PAD[373:354] = tcdm_addr_p2;
-assign gfpga_pad_GPIO_PAD[377:374] = tcdm_be_p2;
-assign gfpga_pad_GPIO_PAD[378]     = tcdm_req_p2;
-assign gfpga_pad_GPIO_PAD[379]     = tcdm_wen_p2;
+assign gfpga_pad_GPIO_PAD[321:290] = tcdm_rdata_p2;
+assign tcdm_wdata_p2               = gfpga_pad_GPIO_PAD[353:322];
+assign tcdm_addr_p2                = gfpga_pad_GPIO_PAD[373:354];
+assign tcdm_be_p2                  = gfpga_pad_GPIO_PAD[377:374];
+assign tcdm_req_p2                 = gfpga_pad_GPIO_PAD[378];
+assign tcdm_wen_p2                 = gfpga_pad_GPIO_PAD[379];
 
 // TCDM Port 1 (380-469)
-assign tcdm_rdata_p1               = gfpga_pad_GPIO_PAD[411:380];
-assign gfpga_pad_GPIO_PAD[443:412] = tcdm_wdata_p1;
-assign gfpga_pad_GPIO_PAD[463:444] = tcdm_addr_p1;
-assign gfpga_pad_GPIO_PAD[467:464] = tcdm_be_p1;
-assign gfpga_pad_GPIO_PAD[468]     = tcdm_req_p1;
-assign gfpga_pad_GPIO_PAD[469]     = tcdm_wen_p1;
+assign gfpga_pad_GPIO_PAD[411:380] = tcdm_rdata_p1;
+assign tcdm_wdata_p1               = gfpga_pad_GPIO_PAD[443:412];
+assign tcdm_addr_p1                = gfpga_pad_GPIO_PAD[463:444];
+assign tcdm_be_p1                  = gfpga_pad_GPIO_PAD[467:464];
+assign tcdm_req_p1                 = gfpga_pad_GPIO_PAD[468];
+assign tcdm_wen_p1                 = gfpga_pad_GPIO_PAD[469];
 
 // TCDM Port 0 (470-559)
-assign tcdm_rdata_p0               = gfpga_pad_GPIO_PAD[501:470];
-assign gfpga_pad_GPIO_PAD[533:502] = tcdm_wdata_p0;
-assign gfpga_pad_GPIO_PAD[553:534] = tcdm_addr_p0;
-assign gfpga_pad_GPIO_PAD[557:554] = tcdm_be_p0;
-assign gfpga_pad_GPIO_PAD[558]     = tcdm_req_p0;
-assign gfpga_pad_GPIO_PAD[559]     = tcdm_wen_p0;
+assign gfpga_pad_GPIO_PAD[501:470] = tcdm_rdata_p0;
+assign tcdm_wdata_p0               = gfpga_pad_GPIO_PAD[533:502];
+assign tcdm_addr_p0                = gfpga_pad_GPIO_PAD[553:534];
+assign tcdm_be_p0                  = gfpga_pad_GPIO_PAD[557:554];
+assign tcdm_req_p0                 = gfpga_pad_GPIO_PAD[558];
+assign tcdm_wen_p0                 = gfpga_pad_GPIO_PAD[559];
 
 // TCDM Grant/FMO/Valid inputs (560-571)
-assign tcdm_gnt_p3   = gfpga_pad_GPIO_PAD[560];
-assign tcdm_gnt_p2   = gfpga_pad_GPIO_PAD[561];
-assign tcdm_gnt_p1   = gfpga_pad_GPIO_PAD[562];
-assign tcdm_gnt_p0   = gfpga_pad_GPIO_PAD[563];
-assign tcdm_fmo_p3   = gfpga_pad_GPIO_PAD[564];
-assign tcdm_fmo_p2   = gfpga_pad_GPIO_PAD[565];
-assign tcdm_fmo_p1   = gfpga_pad_GPIO_PAD[566];
-assign tcdm_fmo_p0   = gfpga_pad_GPIO_PAD[567];
-assign tcdm_valid_p3 = gfpga_pad_GPIO_PAD[568];
-assign tcdm_valid_p2 = gfpga_pad_GPIO_PAD[569];
-assign tcdm_valid_p1 = gfpga_pad_GPIO_PAD[570];
-assign tcdm_valid_p0 = gfpga_pad_GPIO_PAD[571];
+assign gfpga_pad_GPIO_PAD[560] = tcdm_gnt_p3;
+assign gfpga_pad_GPIO_PAD[561] = tcdm_gnt_p2;
+assign gfpga_pad_GPIO_PAD[562] = tcdm_gnt_p1;
+assign gfpga_pad_GPIO_PAD[563] = tcdm_gnt_p0;
+assign gfpga_pad_GPIO_PAD[564] = tcdm_fmo_p3;
+assign gfpga_pad_GPIO_PAD[565] = tcdm_fmo_p2;
+assign gfpga_pad_GPIO_PAD[566] = tcdm_fmo_p1;
+assign gfpga_pad_GPIO_PAD[567] = tcdm_fmo_p0;
+assign gfpga_pad_GPIO_PAD[568] = tcdm_valid_p3;
+assign gfpga_pad_GPIO_PAD[569] = tcdm_valid_p2;
+assign gfpga_pad_GPIO_PAD[570] = tcdm_valid_p1;
+assign gfpga_pad_GPIO_PAD[571] = tcdm_valid_p0;
 
 assign tcdm_clk_p0 = CLK0;  // All connected to the same clock as the eFPGA
 assign tcdm_clk_p1 = CLK0;
@@ -176,9 +176,9 @@ assign apb_fpga_clk_o = CLK0;
 assign events_o = gfpga_pad_GPIO_PAD[679:664];
 
 // Unused signals, thight to 0 for convenience
-assign control_in = '0;
-assign status_out = '0;
-assign version    = '0;
+// assign control_in = '0;
+// assign status_out = '0;
+// assign version    = '0;
 
 // Instantiate the FPGA top module
 fpga_top fpga_instance (
