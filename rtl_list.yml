@@ -17,8 +17,12 @@ riscv-dbg:
 tech_cells_generic:
   path: vendor/pulp_platform_tech_cells_generic
 
-efpga:
-  path: efpga
+# efpga:
+#   path: efpga
+
+# NEW eFPGA
+efpga_fabric:
+  path: efpga_fabric
 
 # TODO(timsaxe): Add source files to `core-v-mcu`
 # ql_fcb:

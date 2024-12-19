@@ -175,7 +175,7 @@ logic        enable_perf_counter_efpga_x;
 logic        reset_perf_counter_efpga_x ;
 logic [31:0] perf_counter_value_x       ;
 
-logic [31:0] control_in;
+logic [31:0] control_in      ;
 logic [31:0] status_out      ;
 logic [ 7:0] version         ;
 logic        event_fifo_valid;
@@ -300,6 +300,7 @@ apb_pll #(.APB_ADDR_WIDTH(APB_ADDR_WIDTH)) apb_fll_if_i (
   .ref_clk_i    (ref_clk_i                          ),
   .soc_clk_o    (soc_clk_o                          ),
   .periph_clk_o (s_periph_clk                       ),
+  /* verilator lint_off IMPLICIT */
   .cluster_clk_o(s_fpga_clk                         ),
   .ref_clk_o    (s_ref_clk                          ),
   .AVDD         (AVDD                               ),
@@ -308,6 +309,7 @@ apb_pll #(.APB_ADDR_WIDTH(APB_ADDR_WIDTH)) apb_fll_if_i (
   .VDDC         (VDDC                               ),
   .VSSC         (VSSC                               )
 );
+/* verilator lint_on IMPLICIT */
 
 
 ///////////////////////////////////////////////////////////////
@@ -598,7 +600,9 @@ efpga_subsystem #(
   .APB_FPGA_ADDR_WIDTH(APB_EFPGA_HWCE_ADDR_WIDTH)
 ) i_efpga_subsystem (
   .asic_clk_i           (soc_clk_o               ),
+  /* verilator lint_off IMPLICIT */
   .fpga_clk0_i          (s_fpga_clk              ),
+  /* verilator lint_on IMPLICIT */
   .fpga_clk1_i          (s_ref_clk               ),
   .fpga_clk2_i          (s_periph_clk            ),
   .fpga_clk3_i          (fpgaio_in_i[9]          ), // qspi clk

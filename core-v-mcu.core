@@ -288,22 +288,36 @@ targets:
       verilator:
         mode: cc
         verilator_options:
-        - -Wno-fatal
-        - -O1
+        # disable warnings
+        - --Wno-fatal
+        - --Wno-UNOPTFLAT
+        - --Wno-WIDTH
+        - --Wno-LITENDIAN
+        - --Wno-CMPCONST
+        - --Wno-UNSIGNED
+        - --Wno-WIDTHCONCAT
+        - --Wno-CMPCONST
+        - --Wno-UNOPTFLAT
+        - --Wno-MISINDENT
+        - -O0
         - --trace
         - --CFLAGS "-fPIC -DVL_TIME_CONTEXT"
         - --exe
+        - --threads 1            # Disable threading to reduce memory
+        - --no-timing
         # - --inline-mult 1000     # Limit inline multiplication
-        # - --output-split 5000    # Reduce split size
-        - --threads 8            # Disable threading to reduce memory
-        # - --no-debug-leak       # Disable debug memory leaks
-        # - --Wno-UNOPTFLAT      # Disable unopt flat warnings
-        # - --max-num-width 64000  # Limit number width
-        # - --unroll-count 1000    # Limit loop unrolling
+        - --output-split 2000    # Reduce split size, more usefully for c++ compilation not for verilator build
+        # - --no-debug-leak       # Disable debug memory leaks, can be very usefull if --debug
+        - --max-num-width 16000  # Limit number width
+        # - --unroll-count 1000    # Limit loop unrolling, rarely needed
         # - --output-split 10000   # Split large files
-        # - --output-split-cfuncs 500  # Split C++ functions
-        - --debug
-        - --gdbbt
+        - --output-split-cfuncs 25  # Split C++ functions, , more usefully for c++ compilation not for verilator build
+        # - --debug
+        # - --gdbbt
+        - --prof-cfuncs # Enables code profiling
+        - --no-decoration
+        - --x-initial unique
+        - --x-assign unique
 
   lint:
     <<: *default_target

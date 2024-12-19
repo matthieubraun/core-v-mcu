@@ -30,6 +30,11 @@ filesets:
     - lb/logical_tile_mult_36_mode_mult_36_.v
     - lb/logical_tile_mult_36_mode_mult_36x36__mult_36x36_slice_mode_default__mult_36x36.v
     - lb/logical_tile_mult_36_mode_mult_36x36__mult_36x36_slice.v
+    - primitve_module/adder.v
+    - primitve_module/dff.v
+    - primitve_module/dpram8k.v
+    - primitve_module/gpio.v
+    - primitve_module/mult_36x36.v
     - routing/cbx_1__0_.v
     - routing/cbx_1__1_.v
     - routing/cbx_1__24_.v
@@ -67,7 +72,6 @@ filesets:
     - sub_module/mux_primitives.v
     - sub_module/muxes.v
     - sub_module/shift_register_banks.v
-    - sub_module/user_defined_templates.v
     - sub_module/wires.v
     file_type: systemVerilogSource
 

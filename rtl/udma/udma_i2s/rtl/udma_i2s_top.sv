@@ -209,11 +209,11 @@ module udma_i2s_top #(
     .cfg_slave_pdm_shift_o     (s_slave_pdm_shift     ),
     
     /* COMMENTED FOR SIMULATION TESTING */
-    //.cfg_master_i2s_en_o       ( s_master_i2s_en        ),
+    .cfg_master_i2s_en_o       (s_master_i2s_en       ),
     /* COMMENTED FOR SIMULATION TESTING */
     .cfg_master_i2s_lsb_first_o(s_master_i2s_lsb_first),
     /* COMMENTED FOR SIMULATION TESTING */
-    //.cfg_master_i2s_2ch_o      ( s_master_i2s_2ch       ),
+    .cfg_master_i2s_2ch_o      (s_master_i2s_2ch      ),
     /* COMMENTED FOR SIMULATION TESTING */
     /* verilator lint_on IMPLICIT */
     .cfg_master_i2s_bits_word_o(s_master_i2s_bits_word),
@@ -341,6 +341,7 @@ module udma_i2s_top #(
     .pad_master_sd1_o          (pad_master_sd1_o      ),
     
     .cfg_slave_en_i            (s_slave_i2s_en        ),
+    /* verilator lint_off IMPLICIT */
     .cfg_master_en_i           (s_master_i2s_en       ),
     
     .cfg_slave_pdm_en_i        (s_slave_pdm_en        ),
@@ -355,6 +356,7 @@ module udma_i2s_top #(
     
     .cfg_master_i2s_lsb_first_i(s_master_i2s_lsb_first),
     .cfg_master_i2s_2ch_i      (s_master_i2s_2ch      ),
+    /* verilator lint_on IMPLICIT */
     .cfg_master_i2s_bits_word_i(s_master_i2s_bits_word),
     .cfg_master_i2s_words_i    (s_master_i2s_words    ),
     
