@@ -299,25 +299,25 @@ targets:
         - --Wno-CMPCONST
         - --Wno-UNOPTFLAT
         - --Wno-MISINDENT
-        - -O0
+        - -O3
         - --trace
         - --CFLAGS "-fPIC -DVL_TIME_CONTEXT"
         - --exe
-        - --threads 1            # Disable threading to reduce memory
-        - --no-timing
+        - --threads 4            # Disable threading to reduce memory
+        # - --no-timing # Only for new verilator versions
         # - --inline-mult 1000     # Limit inline multiplication
-        - --output-split 2000    # Reduce split size, more usefully for c++ compilation not for verilator build
+        # - --output-split 2000    # Reduce split size, more usefully for c++ compilation not for verilator build
         # - --no-debug-leak       # Disable debug memory leaks, can be very usefull if --debug
-        - --max-num-width 16000  # Limit number width
+        # - --max-num-width 16000  # Limit number width
         # - --unroll-count 1000    # Limit loop unrolling, rarely needed
         # - --output-split 10000   # Split large files
-        - --output-split-cfuncs 25  # Split C++ functions, , more usefully for c++ compilation not for verilator build
+        # - --output-split-cfuncs 25  # Split C++ functions, , more usefully for c++ compilation not for verilator build
         # - --debug
         # - --gdbbt
-        - --prof-cfuncs # Enables code profiling
-        - --no-decoration
-        - --x-initial unique
-        - --x-assign unique
+        # - --prof-cfuncs # Enables code profiling
+        # - --no-decoration
+        # - --x-initial unique
+        # - --x-assign unique
 
   lint:
     <<: *default_target

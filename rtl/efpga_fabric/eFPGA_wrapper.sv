@@ -83,25 +83,25 @@ module eFPGA_wrapper (
 logic reset_n;
 assign reset_n = ~(RESET_LB | RESET_LT | RESET_RB | RESET_RT);
 
-wire [79:0] fpga_out;
-wire [79:0] fpga_in ;
-wire [79:0] fpga_oe ;
+wire [31:0] fpga_out;
+wire [31:0] fpga_in ;
+wire [31:0] fpga_oe ;
 
 // Internal signals for configuration
 logic ccff_head;
 logic ccff_tail;
 
 // Bidirectional GPIO handling
-wire [799:0] gfpga_pad_GPIO_PAD;
+wire [31:0] gfpga_pad_GPIO_PAD;
 
-assign fpga_in    = {{(80 - `N_FPGAIO) {1'b0}}, fpgaio_in};
-assign fpgaio_oe  = fpga_oe[`N_FPGAIO-1:0];
-assign fpgaio_out = fpga_out[`N_FPGAIO-1:0];
+assign fpga_in    = fpgaio_in[31:0];  // Take only first 32 bits
+assign fpgaio_oe  = {{(`N_FPGAIO-32){1'b0}}, fpga_oe};  // Zero-extend output enable
+assign fpgaio_out = {{(`N_FPGAIO-32){1'b0}}, fpga_out}; // Zero-extend output data
 
 // Map lower bits to SoC IOs
 genvar i;
 generate
-  for (i = 0; i < `N_FPGAIO; i++) begin : gpio_mapping
+  for (i = 0; i < 32; i++) begin : gpio_mapping
     assign gfpga_pad_GPIO_PAD[i] = fpga_oe[i] ? fpga_out[i] : 1'bz;
     assign fpga_in[i]            = gfpga_pad_GPIO_PAD[i];
   end
@@ -109,71 +109,42 @@ endgenerate
 
 // Start mapping from index 200 to avoid conflict with regular IOs
 // TCDM Port 3 (200-289)
-assign gfpga_pad_GPIO_PAD[231:200] = tcdm_rdata_p3;
-assign tcdm_wdata_p3               = gfpga_pad_GPIO_PAD[263:232];
-assign tcdm_addr_p3                = gfpga_pad_GPIO_PAD[283:264];
-assign tcdm_be_p3                  = gfpga_pad_GPIO_PAD[287:284];
-assign tcdm_req_p3                 = gfpga_pad_GPIO_PAD[288];
-assign tcdm_wen_p3                 = gfpga_pad_GPIO_PAD[289];
-
-// TCDM Port 2 (290-379)
-assign gfpga_pad_GPIO_PAD[321:290] = tcdm_rdata_p2;
-assign tcdm_wdata_p2               = gfpga_pad_GPIO_PAD[353:322];
-assign tcdm_addr_p2                = gfpga_pad_GPIO_PAD[373:354];
-assign tcdm_be_p2                  = gfpga_pad_GPIO_PAD[377:374];
-assign tcdm_req_p2                 = gfpga_pad_GPIO_PAD[378];
-assign tcdm_wen_p2                 = gfpga_pad_GPIO_PAD[379];
-
-// TCDM Port 1 (380-469)
-assign gfpga_pad_GPIO_PAD[411:380] = tcdm_rdata_p1;
-assign tcdm_wdata_p1               = gfpga_pad_GPIO_PAD[443:412];
-assign tcdm_addr_p1                = gfpga_pad_GPIO_PAD[463:444];
-assign tcdm_be_p1                  = gfpga_pad_GPIO_PAD[467:464];
-assign tcdm_req_p1                 = gfpga_pad_GPIO_PAD[468];
-assign tcdm_wen_p1                 = gfpga_pad_GPIO_PAD[469];
-
-// TCDM Port 0 (470-559)
-assign gfpga_pad_GPIO_PAD[501:470] = tcdm_rdata_p0;
-assign tcdm_wdata_p0               = gfpga_pad_GPIO_PAD[533:502];
-assign tcdm_addr_p0                = gfpga_pad_GPIO_PAD[553:534];
-assign tcdm_be_p0                  = gfpga_pad_GPIO_PAD[557:554];
-assign tcdm_req_p0                 = gfpga_pad_GPIO_PAD[558];
-assign tcdm_wen_p0                 = gfpga_pad_GPIO_PAD[559];
-
-// TCDM Grant/FMO/Valid inputs (560-571)
-assign gfpga_pad_GPIO_PAD[560] = tcdm_gnt_p3;
-assign gfpga_pad_GPIO_PAD[561] = tcdm_gnt_p2;
-assign gfpga_pad_GPIO_PAD[562] = tcdm_gnt_p1;
-assign gfpga_pad_GPIO_PAD[563] = tcdm_gnt_p0;
-assign gfpga_pad_GPIO_PAD[564] = tcdm_fmo_p3;
-assign gfpga_pad_GPIO_PAD[565] = tcdm_fmo_p2;
-assign gfpga_pad_GPIO_PAD[566] = tcdm_fmo_p1;
-assign gfpga_pad_GPIO_PAD[567] = tcdm_fmo_p0;
-assign gfpga_pad_GPIO_PAD[568] = tcdm_valid_p3;
-assign gfpga_pad_GPIO_PAD[569] = tcdm_valid_p2;
-assign gfpga_pad_GPIO_PAD[570] = tcdm_valid_p1;
-assign gfpga_pad_GPIO_PAD[571] = tcdm_valid_p0;
+assign tcdm_wdata_p0 = '0;
+assign tcdm_wdata_p1 = '0;
+assign tcdm_wdata_p2 = '0;
+assign tcdm_wdata_p3 = '0;
+assign tcdm_addr_p0  = '0;
+assign tcdm_addr_p1  = '0;
+assign tcdm_addr_p2  = '0;
+assign tcdm_addr_p3  = '0;
+assign tcdm_be_p0    = '0;
+assign tcdm_be_p1    = '0;
+assign tcdm_be_p2    = '0;
+assign tcdm_be_p3    = '0;
+assign tcdm_req_p0   = '0;
+assign tcdm_req_p1   = '0;
+assign tcdm_req_p2   = '0;
+assign tcdm_req_p3   = '0;
+assign tcdm_wen_p0   = '0;
+assign tcdm_wen_p1   = '0;
+assign tcdm_wen_p2   = '0;
+assign tcdm_wen_p3   = '0;
 
 assign tcdm_clk_p0 = CLK0;  // All connected to the same clock as the eFPGA
 assign tcdm_clk_p1 = CLK0;
 assign tcdm_clk_p2 = CLK0;
 assign tcdm_clk_p3 = CLK0;
 
-// LINT interface (572-663)
-assign gfpga_pad_GPIO_PAD[591:572] = lint_ADDR;
-assign gfpga_pad_GPIO_PAD[592]     = lint_WEN;
-assign gfpga_pad_GPIO_PAD[593]     = lint_REQ;
-assign gfpga_pad_GPIO_PAD[597:594] = lint_BE;
-assign gfpga_pad_GPIO_PAD[629:598] = lint_WDATA;
-assign lint_RDATA                  = gfpga_pad_GPIO_PAD[661:630];
-assign lint_GNT                    = gfpga_pad_GPIO_PAD[662];
-assign lint_VALID                  = gfpga_pad_GPIO_PAD[663];
+// LINT interface
+assign lint_RDATA = '0;
+assign lint_GNT   = '0;
+assign lint_VALID = '0;
 
 // APB clock output
 assign apb_fpga_clk_o = CLK0;
 
 // Events output (664-679)
-assign events_o = gfpga_pad_GPIO_PAD[679:664];
+assign events_o = '0;
 
 // Unused signals, thight to 0 for convenience
 // assign control_in = '0;
@@ -182,11 +153,11 @@ assign events_o = gfpga_pad_GPIO_PAD[679:664];
 
 // Instantiate the FPGA top module
 fpga_top fpga_instance (
-  .op_clk            (CLK0              ),
-  .op_reset          (~reset_n          ),
-  .op_set            (1'b0              ), // Tied to ground for now
   .pReset            (~reset_n          ),
   .prog_clk          (CLK0              ),
+  .set               (1'b0              ),
+  .reset             (~reset_n          ),
+  .clk               (CLK0              ),
   .gfpga_pad_GPIO_PAD(gfpga_pad_GPIO_PAD),
   .ccff_head         (ccff_head         ),
   .ccff_tail         (ccff_tail         )
