@@ -3,7 +3,7 @@
 //	Description: Essential gates
 //	Author: Xifan TANG
 //	Organization: University of Utah
-//	Date: Fri Dec  6 10:32:17 2024
+//	Date: Thu Dec 19 17:03:58 2024
 //-------------------------------------------
 //----- Default net type -----
 `default_nettype none
@@ -193,18 +193,18 @@ endmodule
 `default_nettype none
 
 // ----- Verilog module for TGATE -----
-module TGATE(in,
-             sel,
-             selb,
-             out);
+module TGATE(A,
+             S,
+             SI,
+             Y);
 //----- INPUT PORTS -----
-input [0:0] in;
+input [0:0] A;
 //----- INPUT PORTS -----
-input [0:0] sel;
+input [0:0] S;
 //----- INPUT PORTS -----
-input [0:0] selb;
+input [0:0] SI;
 //----- OUTPUT PORTS -----
-output [0:0] out;
+output [0:0] Y;
 
 //----- BEGIN wire-connection ports -----
 //----- END wire-connection ports -----
@@ -213,14 +213,14 @@ output [0:0] out;
 //----- BEGIN Registered ports -----
 //----- END Registered ports -----
 
-	assign out = sel ? in : 1'bz;
+	assign Y = S ? A : 1'bz;
 
 `ifdef ENABLE_TIMING
 // ------ BEGIN Pin-to-pin Timing constraints -----
 	specify
-		(in => out) = (0.01, 0.01);
-		(sel => out) = (0.005, 0.005);
-		(selb => out) = (0.005, 0.005);
+		(A => Y) = (0.01, 0.01);
+		(S => Y) = (0.005, 0.005);
+		(SI => Y) = (0.005, 0.005);
 	endspecify
 // ------ END Pin-to-pin Timing constraints -----
 `endif

@@ -3,7 +3,7 @@
 //	Description: Wires
 //	Author: Xifan TANG
 //	Organization: University of Utah
-//	Date: Fri Dec  6 10:32:17 2024
+//	Date: Thu Dec 19 17:03:58 2024
 //-------------------------------------------
 // ----- BEGIN Verilog modules for regular wires -----
 //----- Default net type -----
